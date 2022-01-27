@@ -4,7 +4,7 @@
             <h2 id="title">Todo List</h2>
             <item-form />
        </div>
-       <item-view />
+       <item-view :items = "items" />
     </div>
 
 </template>
@@ -17,7 +17,27 @@ export default {
     components: {
         itemForm,
         itemView
+    },
+    data() {
+        return {
+            items: []
+        }
+    },
+    methods: {
+        getList () {
+            axios.get('api/items')
+            .then( response => {
+                this.items = response.data
+            })
+            .catch( error => {
+                console.log(error);
+            })
+        }
+    },
+    created() {
+        this.getList();
     }
+
 }
 </script>
 
