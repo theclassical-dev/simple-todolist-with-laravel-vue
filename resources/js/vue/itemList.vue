@@ -48,7 +48,7 @@ export default {
 <style scoped>
     .completed {
         text-decoration: line-through;
-        color: aliceblue;
+        color: chocolate;
     }
     .itemText {
         width: 100%;

@@ -2,7 +2,7 @@
     <div class="todoListContainer">
        <div class="heading">
             <h2 id="title">Todo List</h2>
-            <item-form />
+            <item-form  v-on:reloadList= "getList()" />
        </div>
        <item-view :items = "items" v-on:reloadList= "getList()" />
     </div>
