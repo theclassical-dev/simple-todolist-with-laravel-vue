@@ -4,7 +4,7 @@
             <h2 id="title">Todo List</h2>
             <item-form />
        </div>
-       <item-view :items = "items" />
+       <item-view :items = "items" v-on:reloadList= "getList()" />
     </div>
 
 </template>

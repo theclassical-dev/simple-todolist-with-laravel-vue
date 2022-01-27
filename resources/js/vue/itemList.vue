@@ -1,11 +1,68 @@
 <template>
-    <div class="">
-        List item
+    <div class="item">
+        <input 
+            type="checkbox"
+            @change="updateCheck()"
+            v-model="item.completed"
+        />
+        <span :class="[item.completed ? 'completed' : '', 'itemText']">{{ item.name }}</span>
+        <button @click="rmItem()" class="trashcan">
+            <font-awesome-icon icon="trash" />
+        </button>
     </div>
 </template>
 
 <script>
 export default {
-    props:['item']
+    props:['item'],
+    methods:{
+        updateCheck() {
+            axios.put('api/item/' + this.item.id, {
+                item: this.item
+            })
+            .then(response => {
+                if(response.status == 200) {
+                    this.$emit('itemChanged');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        rmItem() {
+            axios.delete('api/item/' + this.item.id)
+            .then( response=> {
+                if(response.status == 200) {
+                    this.$emit('itemChanged');
+                }
+            })
+            .catch (error => {
+                console.log(error);
+            })
+
+        }
+    }
 }
 </script>
+
+<style scoped>
+    .completed {
+        text-decoration: line-through;
+        color: aliceblue;
+    }
+    .itemText {
+        width: 100%;
+        margin-left: 20px;
+    }
+    .item {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .trashcan {
+        background: #f5f5f5;
+        border: none;
+        color: red;
+        outline: none;
+    }
+</style>
