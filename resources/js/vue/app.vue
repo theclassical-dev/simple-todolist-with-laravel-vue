@@ -1,12 +1,38 @@
 <template>
-    <div>
-       Hello
+    <div class="todoListContainer">
+       <div class="heading">
+            <h2 id="title">Todo List</h2>
+            <item-form />
+       </div>
+       <item-view />
     </div>
 
 </template>
 
 <script>
-export default {
+import itemForm from "./itemForm"
+import itemView from "./itemView"
 
+export default {
+    components: {
+        itemForm,
+        itemView
+    }
 }
 </script>
+
+<style scoped>
+    .todoListContainer {
+        width:350px;
+        margin:auto;
+    }
+
+    .heading {
+        background: #f5f5f5;
+        padding: 10px;
+    }
+
+    #title {
+        text-align: center;
+    }
+</style>
